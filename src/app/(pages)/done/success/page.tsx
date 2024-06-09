@@ -1,7 +1,7 @@
 "use client"
-import {Box, Button, Typography, useMediaQuery} from "@mui/material";
+import {Box, Button, Card, Typography, useMediaQuery} from "@mui/material";
 import {useRouter} from "next/navigation";
-import {CheckCircleOutlined} from "@mui/icons-material";
+import {ArticleOutlined, CheckCircleOutlined, LoopRounded} from "@mui/icons-material";
 import {useInfoContext} from "@/lib/context/InfoContext";
 import SuccessMobile from "@/app/components/SuccesMobile";
 
@@ -53,9 +53,71 @@ const SuccessPage = () => {
                     }}><SuccessMobile/></Box>)}
 
             </Box>
-            <Button sx={{margin: '60px 0 0 0', width: matchesMD ? '300px' : '90%', height: '50px'}}
+
+            {matchesMD &&
+                <Card sx={{
+                    width: '40%',
+                    margin: '100px 0 0px 0',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    height: '100px'
+                }}>
+                    <Box
+                        sx={{
+                            width: '50px',
+                            backgroundColor: '#1565c0',
+                            height: '50px',
+                            margin: '0 10px 0 10px',
+                            borderRadius: '5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: 'relative',
+                        }}
+                    >
+                        <LoopRounded
+                            sx={{
+                                color: '#1565c0',
+                                position: 'absolute',
+                                zIndex: 10,
+                                left: '4px',
+                                background: 'white',
+                                borderRadius: '50%',
+
+                            }}
+                        />
+                        <ArticleOutlined
+                            sx={{
+                                color: '#1565c0',
+                                position: 'absolute',
+                                zIndex: 0,
+                                right: '5px',
+                                background: 'white',
+                                margin: '2px 0 0 0',
+                                fontSize: '30px'
+                            }}
+                        />
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'flex-start',
+                            alignItems: 'flex-start',
+                            width: '90%'
+                        }}>
+                        <Typography sx={{fontWeight: '600'}}>In Zufunkt automatisch auflden?</Typography>
+                        <Typography sx={{color: 'rgba(100,100,100,0.3)', fontSize: '12'}}>Noch komfortabler geht es mit
+                            unserer
+                            automatischen Aufladung!</Typography>
+                    </Box>
+                </Card>
+            }
+
+            <Button sx={{margin: '60px 0 0 0', width: matchesMD ? '40%' : '90%', height: '50px'}}
                     variant={"contained"}
-                    onClick={() => router.push("/choose")}>Neue Bestellung</Button>
+                    onClick={() => router.push("/choose")}>Jetzt einrichten</Button>
         </Box>
     </>
 }

@@ -55,17 +55,8 @@ const ChoosePage = () => {
             }
         };
 
-        // Attach event listener
-        window.addEventListener('resize', handleResize);
-
-        // Initial width
         handleResize();
-
-        // Detach event listener on cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [boxRef]); // Run effect only once on mount
+    }, [boxRef]);
 
     return <>
         <Box
@@ -75,22 +66,19 @@ const ChoosePage = () => {
                     width: '100%',
                     textAlign: 'center',
                     flexDirection: 'column',
-                },
-                ...(matchesMD ? {
                     justifyContent: 'center',
                     alignItems: 'center',
-                } : {
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                })
+                },
             }}>
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-start',
-                justifyContent: 'flex-start',
-                width: matchesMD ? '60%' : "100%",
+                justifyContent: 'space-between',
+                width: matchesMD ? '60%' : "90%",
                 alignText: 'start',
+                margin: '70px 0 20px 0 ',
+                textAlign: 'start',
             }}>
                 {matchesMD && <h2>Guthaben aufladen</h2>}
                 <Typography sx={{fontWeight: '600', fontSize: '18px', marginTop: '10px'}}>Direkt online
@@ -122,7 +110,14 @@ const ChoosePage = () => {
                 />
                 <SumRadioGroup onValueChange={handleAmountChange} boxWidth={boxWidth / 2}/>
             </Box>
-            <Divider sx={{width: matchesMD ? '60%' : '90%', margin: '20px 0 20px 0'}}/>
+            <Box sx={{
+                width: matchesMD ? '60%' : '90%',
+                display: 'flex',
+                justifyContent: 'flex-end',
+ 
+            }}>
+                <Divider sx={{width: matchesMD ? '50%' : '100%', margin: '20px 0 20px 0'}}/>
+            </Box>
             <PaymentMethods onPaymentMethodChange={handlePaymentMethod} boxWidth={boxWidth}/>
             <Button sx={{margin: '20px 0 0 0', width: '300px'}} variant={"contained"} disabled={buttonDisabled}
                     onClick={() => {

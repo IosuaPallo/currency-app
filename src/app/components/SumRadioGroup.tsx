@@ -15,11 +15,8 @@ const SumRadioGroup = (props: SumRadioGroupProps) => {
     const matchesMD = useMediaQuery("(min-width:900px");
 
     const [value, setValue] = useState<number>(0);
-    const [boxWidthCalculated, setBoxWidthCalculated] = useState(matchesMD ? `${(boxWidth - 10 * values.length) / values.length}px` : 'calc(100%-1px)')
+    const [boxWidthCalculated, setBoxWidthCalculated] = useState(matchesMD ? `${(boxWidth - 15 * values.length) / values.length}px` : 'calc(100%-1px)')
 
-    useEffect(() => {
-        setBoxWidthCalculated(matchesMD ? `${(boxWidth - 10 * values.length) / values.length}px` : 'calc(100%-1px)');
-    }, [boxWidth, matchesMD]);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(parseInt((event.target as HTMLInputElement).value));
@@ -29,6 +26,11 @@ const SumRadioGroup = (props: SumRadioGroupProps) => {
     useEffect(() => {
         onValueChange(value);
     }, [onValueChange, value]);
+
+    useEffect(() => {
+        setBoxWidthCalculated(matchesMD ? `${(boxWidth - 10 * values.length) / values.length}px` : 'calc(100%-1px)');
+    }, [boxWidth, matchesMD]);
+
 
     return <>
         <FormControl required error={value === 0} component="fieldset" sx={{width: '100%'}}>
@@ -43,6 +45,7 @@ const SumRadioGroup = (props: SumRadioGroupProps) => {
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'flex-end',
+                        alignItems: 'center',
                         width: '100%',
                     } : {
                         display: 'grid',
@@ -59,7 +62,7 @@ const SumRadioGroup = (props: SumRadioGroupProps) => {
                         sx={{
                             border: '1px solid black',
                             borderRadius: '5px',
-                            margin: matchesMD ? '5px 5px 0 5px' : '5px 8px 0 2px',
+                            margin: matchesMD ? '5px 5px 0 5px' : '5px 5px 0 2px',
                             width: boxWidthCalculated,
                             height: '50px',
                             display: 'flex',

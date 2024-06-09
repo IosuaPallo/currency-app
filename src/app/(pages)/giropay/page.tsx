@@ -44,11 +44,13 @@ const SendEmailPage = () => {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    margin: '70px 0 20px 0 ',
                 },
             }}>
+                <img src={"/giro_w_bg.png"} alt={""} width={180} height={100}/>
                 <Typography sx={{
                     fontWeight: '600',
-                    fontSize: matchesMD ? '25px' : '20px',
+                    fontSize: matchesMD ? '25px' : '18px',
                     margin: '20px 0 20px 0',
                     textAlign: 'start'
                 }}>Bitte
@@ -61,7 +63,7 @@ const SendEmailPage = () => {
                 <Button sx={{margin: '30px 0 0 0', width: matchesMD ? '300px' : '100%', height: '50px'}}
                         variant={"contained"}
                         disabled={buttonDisabled}
-                        onClick={() => router.push("/done")}>
+                        onClick={() => router.push("/done/failed")}>
                     Zahlungspflichtig bestellen
                 </Button>
                 <Button sx={{margin: '20px 0 0 0', width: '250px'}}

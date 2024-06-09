@@ -53,19 +53,21 @@ const PaymentMethods = (props: PaymentMethodsProps) => {
                 flexDirection: 'column',
                 justifyContent: 'flex-start',
                 alignItems: 'flex-start',
-                width: matchesMD ? '60%' : '100%'
+                width: matchesMD ? '60%' : '90%',
             }}>
                 <Typography sx={{color: error ? 'red' : 'black'}}>Bezahlmethode *</Typography>
             </Box>
             <Box sx={{
-                ...(matchesMD ? {display: 'flex', flexDirection: 'row', width: '60%'} : {
-                    display: 'grid',
-                    gridTemplateColumns: matchesMD ? 'repeat(auto-fit, minmax(0, 1fr))' : 'repeat(2, 1fr)',
-                    gap: '10px',
-                    width: '90%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                })
+                ...(matchesMD ? {display: 'flex', flexDirection: 'row', width: '60%', justifyContent: 'space-between'} :
+                    {
+                        display: 'grid',
+                        gridTemplateColumns: matchesMD ? 'repeat(auto-fit, minmax(0, 1fr))' : 'repeat(2, 1fr)',
+
+                        width: '90%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+
+                    })
 
             }}>
                 {
@@ -76,9 +78,9 @@ const PaymentMethods = (props: PaymentMethodsProps) => {
                             boxShadow: '3px 5px 3px rgba(25,25,25,0.3)',
                             width: boxWidthCalculated,
                             height: matchesMD ? '90px' : '120px',
-                            margin: '5px 10px 5px 0',
+                            margin: '5px 5px 5px 0px',
                             background: 'white',
-                            transform: paymentMethod == method.name ? 'scale(1.1)' : 'scale(1)',
+                            transform: paymentMethod == method.name ? 'scale(1.05)' : 'scale(1)',
                             "&:hover": {
                                 background: 'rgba(100,100,100,0.3)'
                             },
