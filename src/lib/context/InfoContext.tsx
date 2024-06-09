@@ -2,7 +2,7 @@
 
 import {createContext, FC, PropsWithChildren, useContext, useState} from "react";
 
-type InfoContextType = {
+export type InfoContextType = {
     phoneNumber: string;
     setPhoneNumber: (phoneNumber: string) => void;
     amount: number;

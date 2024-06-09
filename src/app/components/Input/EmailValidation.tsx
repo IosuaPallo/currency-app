@@ -26,7 +26,6 @@ const EmailValidation = (props: EmailValidationProps) => {
             required
             error={emailError}
             label={"E-Mailadresse"}
-            defaultValue={email}
             value={email}
             placeholder={"Ihre E-Mailadresse"}
             name={"email"}

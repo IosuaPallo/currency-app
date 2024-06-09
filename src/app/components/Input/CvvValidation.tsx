@@ -35,7 +35,6 @@ const CvvValidation = (props: CvvValidationProps) => {
                 required
                 error={cvvError}
                 label="Sicherheitscode"
-                defaultValue={cvv}
                 value={cvv}
                 placeholder={"CVV"}
                 name={"cvv"}

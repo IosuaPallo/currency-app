@@ -35,15 +35,14 @@ const CreditNumberValidation = (props: CreditCardValidationProps) => {
 
     return <>
         <FormControl sx={{width: '100%'}} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-cvv">Sicherheitscode</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-credit-number">Sicherheitscode</InputLabel>
             <OutlinedInput
-                id="outlined-adornment-cvv"
+                id="outlined-adornment-credit-number"
                 type={showNumber ? 'text' : 'password'}
                 onChange={(e) => handleCreditNumberChange(e)}
                 required
                 error={creditNumberError}
                 label="Kreditkartennummber"
-                defaultValue={creditNumber}
                 value={creditNumber}
                 placeholder={"**** **** **** ****"}
                 name={"creditNumber"}

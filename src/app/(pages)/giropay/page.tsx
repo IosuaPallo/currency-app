@@ -36,20 +36,6 @@ const SendEmailPage = () => {
                 alignItems: 'center',
             })
         }}>
-            {!matchesMD &&
-                <Box sx={{
-                    width: '100%',
-                    background: "#1565c0",
-                    height: '70px',
-                    position: 'relative',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                    <Typography sx={{fontWeight: '600', color: 'white', fontSize: '25px'}}>Guthaben
-                        aufladen</Typography>
-                </Box>
-            }
 
             <Box sx={{
                 ...{

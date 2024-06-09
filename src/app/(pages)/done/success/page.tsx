@@ -1,9 +1,9 @@
 "use client"
 import {Box, Button, Typography, useMediaQuery} from "@mui/material";
 import {useRouter} from "next/navigation";
-import FailedMobile from "@/app/components/FailedMobile";
 import {CheckCircleOutlined} from "@mui/icons-material";
 import {useInfoContext} from "@/lib/context/InfoContext";
+import SuccessMobile from "@/app/components/SuccesMobile";
 
 const SuccessPage = () => {
     const router = useRouter();
@@ -50,7 +50,7 @@ const SuccessPage = () => {
                         transform: 'translateX(-25%)',
                         display: 'flex',
                         flexDirection: 'column'
-                    }}><FailedMobile/></Box>)}
+                    }}><SuccessMobile/></Box>)}
 
             </Box>
             <Button sx={{margin: '60px 0 0 0', width: matchesMD ? '300px' : '90%', height: '50px'}}

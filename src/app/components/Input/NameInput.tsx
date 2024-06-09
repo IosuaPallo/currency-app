@@ -31,7 +31,6 @@ const NameInput = (props: NameInputProps) => {
         <TextField
             required
             label={matchesMD ? "Name" : "Name des Karteninhabers"}
-            defaultValue={name}
             name={"name"}
             placeholder={"Name des Karteninhabers"}
             onChange={(e) => handleNameChange(e)}

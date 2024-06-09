@@ -15,14 +15,15 @@ const SumRadioGroup = (props: SumRadioGroupProps) => {
     const matchesMD = useMediaQuery("(min-width:900px");
 
     const [value, setValue] = useState<number>(0);
+    const [boxWidthCalculated, setBoxWidthCalculated] = useState(matchesMD ? `${(boxWidth - 10 * values.length) / values.length}px` : 'calc(100%-1px)')
+
+    useEffect(() => {
+        setBoxWidthCalculated(matchesMD ? `${(boxWidth - 10 * values.length) / values.length}px` : 'calc(100%-1px)');
+    }, [boxWidth, matchesMD]);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(parseInt((event.target as HTMLInputElement).value));
     };
-
-    const boxWidthCalculated = matchesMD
-        ? `${(boxWidth - 20 * values.length) / values.length}px`
-        : 'calc(100%)'; // 50% width minus the margin
 
 
     useEffect(() => {

@@ -84,20 +84,6 @@ const ChoosePage = () => {
                     alignItems: 'center',
                 })
             }}>
-            {!matchesMD &&
-                <Box sx={{
-                    width: '100%',
-                    background: "#1565c0",
-                    height: '70px',
-                    position: 'relative',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                    <Typography sx={{fontWeight: '600', color: 'white', fontSize: '25px'}}>Guthaben
-                        aufladen</Typography>
-                </Box>
-            }
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -125,7 +111,6 @@ const ChoosePage = () => {
                     required
                     error={phoneNumberError}
                     label="Aufzuladende Rufnummer"
-                    defaultValue={phoneNumber}
                     value={phoneNumber}
                     placeholder={"0176123456789"}
                     name="phoneNumber"

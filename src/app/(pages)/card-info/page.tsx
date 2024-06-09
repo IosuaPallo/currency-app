@@ -98,20 +98,6 @@ const CardInfoPage = () => {
                 alignItems: 'center',
             })
         }}>
-            {!matchesMD &&
-                <Box sx={{
-                    width: '100%',
-                    background: "#1565c0",
-                    height: '70px',
-                    position: 'relative',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                    <Typography sx={{fontWeight: '600', color: 'white', fontSize: '25px'}}>Guthaben
-                        aufladen</Typography>
-                </Box>
-            }
             <Box sx={{
                 width: matchesMD ? '60%' : "95%",
                 display: 'flex',
@@ -193,7 +179,6 @@ const CardInfoPage = () => {
                             required
                             error={expireDateError}
                             label={"Ablaufdatum"}
-                            defaultValue={expireDate}
                             value={expireDate}
                             placeholder={"MM/YY"}
                             name={"expireDate"}
