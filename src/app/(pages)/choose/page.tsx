@@ -1,13 +1,17 @@
 "use client"
-import {Box, Button, Divider, TextField} from "@mui/material";
+import {Box, Button, Divider, TextField, Typography, useMediaQuery} from "@mui/material";
 import {useRouter} from "next/navigation";
 import usePhoneNumberValidation from "@/lib/hooks/usePhoneNumberValidation";
 import {ChangeEvent, useEffect, useRef, useState} from "react";
 import SumRadioGroup from "@/app/components/SumRadioGroup";
 import PaymentMethods from "@/app/components/PaymentMethods";
+import {useInfoContext} from "@/lib/context/InfoContext";
 
 const ChoosePage = () => {
     const router = useRouter();
+    const matchesMD = useMediaQuery("(min-width:900px)")
+    const infoContext = useInfoContext();
+
 
     const boxRef = useRef(null);
     const [boxWidth, setBoxWidth] = useState(0);
@@ -35,6 +39,13 @@ const ChoosePage = () => {
         setPaymentMethod(method);
     }
 
+    const handleGoToNextPage = () => {
+        console.log("Am ajuns")
+        infoContext.setAmount(amount);
+        infoContext.setPhoneNumber(phoneNumber);
+        router.push(paymentMethod === 'giropay' ? "/giropay" : "/card-info");
+    }
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -54,56 +65,86 @@ const ChoosePage = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []); // Run effect only once on mount
-
+    }, [boxRef]); // Run effect only once on mount
 
     return <>
         <Box
             sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                width: '60%',
-                justifyContent: 'center',
-                alignItems: 'center'
+                ...{
+                    display: 'flex',
+                    width: '100%',
+                    textAlign: 'center',
+                    flexDirection: 'column',
+                },
+                ...(matchesMD ? {
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                } : {
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                })
             }}>
+            {!matchesMD &&
+                <Box sx={{
+                    width: '100%',
+                    background: "#1565c0",
+                    height: '70px',
+                    position: 'relative',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <Typography sx={{fontWeight: '600', color: 'white', fontSize: '25px'}}>Guthaben
+                        aufladen</Typography>
+                </Box>
+            }
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'start',
-                justifyContent: 'start',
-                width: '100%'
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                width: matchesMD ? '60%' : "100%",
+                alignText: 'start',
             }}>
-                <h2>Guthaben aufladen</h2>
-                <h3>Direkt online aufladen</h3>
-                <p>Der gewahlte Aufladebetrag steht direkt zur Verfungung</p>
+                {matchesMD && <h2>Guthaben aufladen</h2>}
+                <Typography sx={{fontWeight: '600', fontSize: '18px', marginTop: '10px'}}>Direkt online
+                    aufladen</Typography>
+                <Typography sx={{fontWeight: '300', fontSize: '15px'}}>Der gewahlte Aufladebetrag steht direkt zur
+                    Verfungung</Typography>
             </Box>
             <Box ref={boxRef}
                  sx={{
                      display: 'flex',
-                     justifyContent: 'space-between',
-                     width: '100%',
-                     alignItems: 'end',
+                     flexDirection: matchesMD ? 'row' : 'column',
+                     justifyContent: 'flex-end',
+                     alignItems: 'flex-end',
+                     width: matchesMD ? '60%' : '90%',
+                     margin: '20px 0 20px 0 ',
                  }}>
                 <TextField
                     required
                     error={phoneNumberError}
-                    label="Rufnummer"
+                    label="Aufzuladende Rufnummer"
                     defaultValue={phoneNumber}
                     value={phoneNumber}
+                    placeholder={"0176123456789"}
                     name="phoneNumber"
                     onChange={(e) => handlePhoneNumberChange(e)}
-                    sx={{width: '50%'}}
+                    sx={{width: matchesMD ? '90%' : '100%', margin: matchesMD ? '0' : '20px 0 20px 0'}}
                     InputProps={{
-                        sx: {height: '45px'}, // Set height to 30px
+                        sx: {height: '50px'},
                     }}
                 />
                 <SumRadioGroup onValueChange={handleAmountChange} boxWidth={boxWidth / 2}/>
             </Box>
-            <Divider sx={{width: '100%', margin: '20px 0 20px 0'}}/>
+            <Divider sx={{width: matchesMD ? '60%' : '90%', margin: '20px 0 20px 0'}}/>
             <PaymentMethods onPaymentMethodChange={handlePaymentMethod} boxWidth={boxWidth}/>
             <Button sx={{margin: '20px 0 0 0', width: '300px'}} variant={"contained"} disabled={buttonDisabled}
-                    onClick={() => router.push("/card-info")}>Next
-                page</Button>
+                    onClick={() => {
+                        handleGoToNextPage()
+                    }}>
+                Zahlungspflichtig bestellen
+            </Button>
         </Box>
     </>
 }

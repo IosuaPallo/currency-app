@@ -1,4 +1,4 @@
-import {Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+import {Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, useMediaQuery} from "@mui/material";
 import {ChangeEvent, useEffect, useState} from "react";
 
 type SumRadioGroupProps = {
@@ -12,46 +12,64 @@ const SumRadioGroup = (props: SumRadioGroupProps) => {
 
     const {onValueChange, boxWidth} = props;
 
+    const matchesMD = useMediaQuery("(min-width:900px");
+
     const [value, setValue] = useState<number>(0);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(parseInt((event.target as HTMLInputElement).value));
     };
 
+    const boxWidthCalculated = matchesMD
+        ? `${(boxWidth - 20 * values.length) / values.length}px`
+        : 'calc(100%)'; // 50% width minus the margin
+
+
     useEffect(() => {
         onValueChange(value);
-    }, [value]);
+    }, [onValueChange, value]);
 
     return <>
-        <FormControl required error={value === 0} component={"fieldset"}>
+        <FormControl required error={value === 0} component="fieldset" sx={{width: '100%'}}>
             <FormLabel id="demo-controlled-radio-buttons-group">Aufladebetrag</FormLabel>
             <RadioGroup
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
                 value={value}
                 onChange={handleChange}
-                sx={{display: 'flex', flexDirection: 'row'}}
+                sx={{
+                    ...(matchesMD ? {
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                        width: '100%',
+                    } : {
+                        display: 'grid',
+                        gridTemplateColumns: matchesMD ? 'repeat(auto-fit, minmax(0, 1fr))' : 'repeat(2, 1fr)',
+                        gap: '10px',
+                        width: '100%',
+                    })
+
+                }}
             >
-                {values.map(value => (
+                {values.map(val => (
                     <Box
-                        key={value}
+                        key={val}
                         sx={{
                             border: '1px solid black',
                             borderRadius: '5px',
-                            margin: '5px 5px 0 5px',
-                            padding: '5px',
-                            width: `${(boxWidth - 15 * values.length) / values.length}px`,
-                            height: '45px',
+                            margin: matchesMD ? '5px 5px 0 5px' : '5px 8px 0 2px',
+                            width: boxWidthCalculated,
+                            height: '50px',
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-
                         }}
                     >
                         <FormControlLabel
-                            value={`${value}`}
+                            value={`${val}`}
                             control={<Radio/>}
-                            label={`\u20AC ${value}`}
+                            label={`\u20AC ${val}`}
                         />
                     </Box>
                 ))}
